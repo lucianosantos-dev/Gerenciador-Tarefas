@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
 
     @Autowired
     private TarefaRepository repository;
-
 
 
     @Override
@@ -28,5 +28,11 @@ public class TarefaServiceImpl implements TarefaService {
         tarefa.setDataCriacao(LocalDate.now());
         tarefa.setConcluida(false);
         return repository.save(tarefa);
+    }
+
+    @Override
+    public Tarefa buscarTarefaPorId(Long id) {
+        Optional<Tarefa> optional = repository.findById(id);
+        return optional.orElseThrow(() -> new RuntimeException("Erro! Tarefa não encontrada com esse ID: " + id));
     }
 }

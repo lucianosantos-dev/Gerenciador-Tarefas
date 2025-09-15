@@ -4,10 +4,7 @@ import com.lucianodev.gerenciador_de_tarefas.entities.Tarefa;
 import com.lucianodev.gerenciador_de_tarefas.services.TarefaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/tarefas")
@@ -23,5 +20,11 @@ public class TarefaController {
     public ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa) {
         Tarefa tarefaSalva = tarefaService.salvarTarefa(tarefa);
         return ResponseEntity.status(HttpStatus.CREATED).body(tarefaSalva);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
+        Tarefa tarefa = tarefaService.buscarTarefaPorId(id);
+        return ResponseEntity.ok().body(tarefa);
     }
 }
