@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,10 @@ public class TarefaServiceImpl implements TarefaService {
     public Tarefa buscarTarefaPorId(Long id) {
         Optional<Tarefa> optional = repository.findById(id);
         return optional.orElseThrow(() -> new RuntimeException("Erro! Tarefa não encontrada com esse ID: " + id));
+    }
+
+    @Override
+    public List<Tarefa> buscarTodasTarefas() {
+         return repository.findAll();
     }
 }

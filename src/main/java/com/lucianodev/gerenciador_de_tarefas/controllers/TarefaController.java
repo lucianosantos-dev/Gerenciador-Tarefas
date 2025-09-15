@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/tarefas")
 public class TarefaController {
@@ -26,5 +28,11 @@ public class TarefaController {
     public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
         Tarefa tarefa = tarefaService.buscarTarefaPorId(id);
         return ResponseEntity.ok().body(tarefa);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Tarefa>> buscarTodasTarefas() {
+        List<Tarefa> listarTarefas = tarefaService.buscarTodasTarefas();
+        return ResponseEntity.ok(listarTarefas);
     }
 }
