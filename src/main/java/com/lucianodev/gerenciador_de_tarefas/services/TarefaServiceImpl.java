@@ -2,6 +2,7 @@ package com.lucianodev.gerenciador_de_tarefas.services;
 
 import com.lucianodev.gerenciador_de_tarefas.entities.Tarefa;
 import com.lucianodev.gerenciador_de_tarefas.repositories.TarefaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,20 @@ public class TarefaServiceImpl implements TarefaService {
 
     @Override
     public List<Tarefa> buscarTodasTarefas() {
-         return repository.findAll();
+        return repository.findAll();
+    }
+
+    @Override
+    public Tarefa atualizarTarefa(Tarefa novaTarefa, Long id) {
+        Optional<Tarefa> optional = repository.findById(id);
+        if (optional.isEmpty()) {
+            throw new EntityNotFoundException("ID não encontrado na lista de tarefas!");
+        } else {
+            Tarefa tarefaOriginal = optional.get();
+            tarefaOriginal.setDescricao(novaTarefa.getDescricao());
+            tarefaOriginal.setConcluida(novaTarefa.getConcluida());
+            tarefaOriginal.setDataVencimento(novaTarefa.getDataVencimento());
+            return repository.save(tarefaOriginal);
+        }
     }
 }

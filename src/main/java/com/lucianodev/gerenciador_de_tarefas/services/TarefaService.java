@@ -10,7 +10,7 @@ public interface TarefaService {
     Tarefa salvarTarefa(Tarefa tarefa);
     Tarefa buscarTarefaPorId(Long id);
     List<Tarefa> buscarTodasTarefas();
-
+    Tarefa atualizarTarefa(Tarefa novaTarefa,Long id);
 
 
 }
