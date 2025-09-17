@@ -56,4 +56,14 @@ public class TarefaServiceImpl implements TarefaService {
             return repository.save(tarefaOriginal);
         }
     }
+
+    @Override
+    public void deletarTarefaPorId(Long id) {
+        Optional<Tarefa> optional = repository.findById(id);
+        if (optional.isEmpty()) {
+            throw new EntityNotFoundException("Erro! ID invalído. Tente novamente.");
+        } else {
+            repository.deleteById(id);
+        }
+    }
 }

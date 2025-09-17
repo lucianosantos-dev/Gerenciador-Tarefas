@@ -11,6 +11,6 @@ public interface TarefaService {
     Tarefa buscarTarefaPorId(Long id);
     List<Tarefa> buscarTodasTarefas();
     Tarefa atualizarTarefa(Tarefa novaTarefa,Long id);
-
+    void deletarTarefaPorId(Long id);
 
 }
