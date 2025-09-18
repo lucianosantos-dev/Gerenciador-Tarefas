@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(value = "/tarefas")
 public class TarefaController {
 
-    private TarefaService tarefaService;
+    private final TarefaService tarefaService;
 
     public TarefaController(TarefaService tarefaService) {
         this.tarefaService = tarefaService;

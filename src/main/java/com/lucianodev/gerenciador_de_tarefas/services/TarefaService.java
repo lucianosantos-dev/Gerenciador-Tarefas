@@ -4,13 +4,18 @@ package com.lucianodev.gerenciador_de_tarefas.services;
 import com.lucianodev.gerenciador_de_tarefas.entities.Tarefa;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TarefaService {
 
     Tarefa salvarTarefa(Tarefa tarefa);
+
     Tarefa buscarTarefaPorId(Long id);
+
     List<Tarefa> buscarTodasTarefas();
-    Tarefa atualizarTarefa(Tarefa novaTarefa,Long id);
+
+    Tarefa atualizarTarefa(Tarefa novaTarefa, Long id);
+
     void deletarTarefaPorId(Long id);
 
 }

@@ -2,6 +2,7 @@ package com.lucianodev.gerenciador_de_tarefas.services;
 
 import com.lucianodev.gerenciador_de_tarefas.entities.Tarefa;
 import com.lucianodev.gerenciador_de_tarefas.repositories.TarefaRepository;
+import com.lucianodev.gerenciador_de_tarefas.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,11 +60,10 @@ public class TarefaServiceImpl implements TarefaService {
 
     @Override
     public void deletarTarefaPorId(Long id) {
-        Optional<Tarefa> optional = repository.findById(id);
-        if (optional.isEmpty()) {
-            throw new EntityNotFoundException("Erro! ID invalído. Tente novamente.");
-        } else {
+        if (repository.existsById(id)) {
             repository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException(id);
         }
     }
 }
